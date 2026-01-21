@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "./auth.css";
 
-function Login() {
+function Login({ goRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -10,7 +11,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (email === "" || password === "") {
+    if (!email || !password) {
       setError("Email and password required");
       setSuccess("");
       return;
@@ -19,65 +20,57 @@ function Login() {
     setError("");
     setSuccess("Login successful");
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-
+    // ✅ Fields clear after success
     setEmail("");
     setPassword("");
   }
 
   return (
-    <div>
+    <div className="auth-container">
       <h2>Login</h2>
 
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
+
       <form onSubmit={handleSubmit}>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
 
-        {/* Email */}
-        <div>
-          <label htmlFor="email">Email</label><br />
+        <label>Password</label>
+        <div className="password-box">
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
+          <span
+            className="eye"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            👁
+          </span>
         </div>
-
-        {/* Password with Eye */}
-        <div>
-          <label htmlFor="password">Password</label><br />
-
-          <div style={{ position: "relative", width: "250px" }}>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{ width: "100%", paddingRight: "30px" }}
-            />
-
-            <span
-              onClick={() => setShowPassword(!showPassword)}
-              style={{
-                position: "absolute",
-                right: "8px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                cursor: "pointer",
-                userSelect: "none"
-              }}
-            >
-              👁
-            </span>
-          </div>
-        </div>
-
-        <br />
 
         <button type="submit">Login</button>
       </form>
+
+      <p className="switch-text">
+        New user?{" "}
+        <button
+          type="button"
+          onClick={() => {
+            setError("");
+            setSuccess("");
+            goRegister();
+          }}
+        >
+          Register
+        </button>
+      </p>
     </div>
   );
 }

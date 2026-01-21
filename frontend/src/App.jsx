@@ -1,13 +1,20 @@
-
+import { useState } from "react";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
+  const [page, setPage] = useState("login");
+
   return (
-    <div>
-      <h1>User Management System</h1>
-      <p>React Frontend Started</p>
-      <Login />
-    </div>
+    <>
+      {page === "login" && (
+        <Login goRegister={() => setPage("register")} />
+      )}
+
+      {page === "register" && (
+        <Register goLogin={() => setPage("login")} />
+      )}
+    </>
   );
 }
 

@@ -1,0 +1,64 @@
+.auth-container {
+  width: 320px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+  font-family: Arial;
+}
+
+.auth-container h2 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.password-box {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  text-align: center;
+}
+
+.switch-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.switch-text button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}
